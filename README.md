@@ -17,3 +17,11 @@ Telco Customer Churn Dataset
 - [ ] Model Training
 - [ ] Evaluation
 - [ ] Deployment
+
+## Progress
+
+### Dataset Overview
+
+- Records: 7043
+- Features: 21
+- Target Variable: Churn
