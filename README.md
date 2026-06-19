@@ -53,3 +53,18 @@ Dataset exhibits moderate class imbalance and may require techniques such as SMO
 - `TotalCharges` was stored as object instead of numeric.
 - Investigation revealed 11 invalid entries.
 - These entries could not be converted to numeric values and require cleaning.
+
+### Data Cleaning
+
+#### TotalCharges
+
+Issue:
+- Column stored as object instead of numeric.
+- 11 rows contained blank values.
+
+Investigation:
+- All affected customers had tenure = 0.
+
+Resolution:
+- Replaced blank values with 0.
+- Converted TotalCharges to float64.
