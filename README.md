@@ -25,3 +25,16 @@ Telco Customer Churn Dataset
 - Records: 7043
 - Features: 21
 - Target Variable: Churn
+
+## Dataset Inspection
+
+### Shape
+- Rows: 7043
+- Columns: 21
+
+### Data Types
+- Numerical Features: 3
+- Categorical Features: 18
+
+### Observation
+- `TotalCharges` is stored as object instead of numeric and requires investigation.
