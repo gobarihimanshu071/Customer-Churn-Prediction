@@ -47,3 +47,9 @@ Telco Customer Churn Dataset
 ### Observation
 
 Dataset exhibits moderate class imbalance and may require techniques such as SMOTE during model training.
+
+### Data Quality Investigation
+
+- `TotalCharges` was stored as object instead of numeric.
+- Investigation revealed 11 invalid entries.
+- These entries could not be converted to numeric values and require cleaning.
