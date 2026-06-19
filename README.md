@@ -38,3 +38,12 @@ Telco Customer Churn Dataset
 
 ### Observation
 - `TotalCharges` is stored as object instead of numeric and requires investigation.
+
+### Target Distribution
+
+- Churned Customers: 26.54%
+- Retained Customers: 73.46%
+
+### Observation
+
+Dataset exhibits moderate class imbalance and may require techniques such as SMOTE during model training.
