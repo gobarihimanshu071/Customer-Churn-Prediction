@@ -68,3 +68,22 @@ Investigation:
 Resolution:
 - Replaced blank values with 0.
 - Converted TotalCharges to float64.
+
+### Summary Statistics
+
+#### Tenure
+- Average tenure: 32.37 months
+- Median tenure: 29 months
+- Range: 0–72 months
+
+#### Monthly Charges
+- Average monthly charge: 64.76
+- Range: 18.25–118.75
+
+#### Total Charges
+- Average total charge: 2279.73
+- Maximum total charge: 8684.80
+
+### Initial Observations
+- Large variation exists in customer spending.
+- Tenure may be an important predictor of churn.
