@@ -87,3 +87,15 @@ Resolution:
 ### Initial Observations
 - Large variation exists in customer spending.
 - Tenure may be an important predictor of churn.
+
+### Tenure and Churn Analysis
+
+Key Findings:
+
+- Customers who stayed had an average tenure of 37.57 months.
+- Customers who churned had an average tenure of 17.98 months.
+- Median tenure for churned customers was only 10 months.
+
+Business Insight:
+
+Customer churn is significantly higher among newer customers. Early customer retention programs could substantially reduce churn rates.
