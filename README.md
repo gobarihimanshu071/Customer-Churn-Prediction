@@ -137,3 +137,15 @@ Customer churn is significantly higher among newer customers. Early customer ret
 3. Online Security
 4. Tech Support
 5. Monthly Charges
+
+#### Internet Service
+
+Churn Rate by Internet Service:
+
+- Fiber Optic: 41.89%
+- DSL: 18.96%
+- No Internet Service: 7.40%
+
+Business Insight:
+
+Fiber Optic customers exhibited significantly higher churn rates than DSL customers. This may indicate higher pricing sensitivity, greater customer expectations, or interactions with other service-related features.
