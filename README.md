@@ -99,3 +99,41 @@ Key Findings:
 Business Insight:
 
 Customer churn is significantly higher among newer customers. Early customer retention programs could substantially reduce churn rates.
+
+## Exploratory Data Analysis
+
+### Churn Distribution
+- 73.46% retained customers
+- 26.54% churned customers
+
+### Key Findings
+
+#### Tenure
+- Churned customers had average tenure of 17.98 months.
+- Retained customers had average tenure of 37.57 months.
+
+#### Monthly Charges
+- Churned customers paid higher monthly charges on average.
+- Mean MonthlyCharges:
+  - Churned: 74.44
+  - Retained: 61.27
+
+#### Contract Type
+- Month-to-month: 42.71% churn rate
+- One year: 11.27% churn rate
+- Two year: 2.83% churn rate
+
+#### Online Security
+- No Online Security: 41.77% churn rate
+- Online Security: 14.61% churn rate
+
+#### Tech Support
+- No Tech Support: 41.64% churn rate
+- Tech Support: 15.17% churn rate
+
+### Preliminary Churn Drivers
+1. Contract Type
+2. Tenure
+3. Online Security
+4. Tech Support
+5. Monthly Charges
