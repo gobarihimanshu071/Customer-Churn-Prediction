@@ -99,53 +99,168 @@ Key Findings:
 Business Insight:
 
 Customer churn is significantly higher among newer customers. Early customer retention programs could substantially reduce churn rates.
+# Exploratory Data Analysis (EDA)
 
-## Exploratory Data Analysis
+## Dataset Overview
 
-### Churn Distribution
-- 73.46% retained customers
-- 26.54% churned customers
+- Records: 7043
+- Features: 21
+- Target Variable: Churn
 
-### Key Findings
+---
 
-#### Tenure
-- Churned customers had average tenure of 17.98 months.
-- Retained customers had average tenure of 37.57 months.
+## Data Cleaning
 
-#### Monthly Charges
+### TotalCharges
+
+- Found 11 blank values in the `TotalCharges` column.
+- All affected customers had `tenure = 0`.
+- Replaced blank values with `0`.
+- Converted `TotalCharges` from object to float.
+
+---
+
+## Target Distribution
+
+| Churn | Percentage |
+|--------|------------|
+| No | 73.46% |
+| Yes | 26.54% |
+
+Observation:
+
+- The dataset has moderate class imbalance.
+- This will be handled later using SMOTE.
+
+---
+
+# Key Business Insights
+
+## Tenure
+
+- Customers who churned had an average tenure of **17.98 months**.
+- Customers who stayed had an average tenure of **37.57 months**.
+
+**Business Insight**
+
+New customers are much more likely to churn than long-term customers.
+
+---
+
+## Monthly Charges
+
 - Churned customers paid higher monthly charges on average.
-- Mean MonthlyCharges:
-  - Churned: 74.44
-  - Retained: 61.27
 
-#### Contract Type
-- Month-to-month: 42.71% churn rate
-- One year: 11.27% churn rate
-- Two year: 2.83% churn rate
+| Churn | Mean Monthly Charges |
+|--------|----------------------|
+| No | 61.27 |
+| Yes | 74.44 |
 
-#### Online Security
-- No Online Security: 41.77% churn rate
-- Online Security: 14.61% churn rate
+**Business Insight**
 
-#### Tech Support
-- No Tech Support: 41.64% churn rate
-- Tech Support: 15.17% churn rate
+Customers paying higher monthly charges are more likely to switch providers.
 
-### Preliminary Churn Drivers
-1. Contract Type
-2. Tenure
-3. Online Security
-4. Tech Support
-5. Monthly Charges
+---
 
-#### Internet Service
+## Contract Type
 
-Churn Rate by Internet Service:
+| Contract | Churn Rate |
+|-----------|-----------:|
+| Month-to-month | 42.71% |
+| One year | 11.27% |
+| Two year | 2.83% |
 
-- Fiber Optic: 41.89%
-- DSL: 18.96%
-- No Internet Service: 7.40%
+**Business Insight**
 
-Business Insight:
+Month-to-month customers have the highest churn.
+Long-term contracts significantly improve retention.
 
-Fiber Optic customers exhibited significantly higher churn rates than DSL customers. This may indicate higher pricing sensitivity, greater customer expectations, or interactions with other service-related features.
+---
+
+## Internet Service
+
+| Service | Churn Rate |
+|----------|-----------:|
+| DSL | 18.96% |
+| Fiber Optic | 41.89% |
+| No Internet | 7.40% |
+
+**Business Insight**
+
+Fiber Optic customers exhibit significantly higher churn and should be prioritized for retention campaigns.
+
+---
+
+## Online Security
+
+| Security | Churn Rate |
+|-----------|-----------:|
+| No | 41.77% |
+| Yes | 14.61% |
+| No Internet Service | 7.40% |
+
+**Business Insight**
+
+Customers without Online Security are almost three times more likely to churn.
+
+---
+
+## Tech Support
+
+| Tech Support | Churn Rate |
+|--------------|-----------:|
+| No | 41.64% |
+| Yes | 15.17% |
+| No Internet Service | 7.40% |
+
+**Business Insight**
+
+Providing technical support is strongly associated with lower churn.
+
+---
+
+## Payment Method
+
+| Payment Method | Churn Rate |
+|----------------|-----------:|
+| Electronic Check | 45.29% |
+| Mailed Check | 19.11% |
+| Bank Transfer (Automatic) | 16.71% |
+| Credit Card (Automatic) | 15.24% |
+
+**Business Insight**
+
+Customers using Electronic Check have the highest churn rate.
+
+---
+
+## Dependents
+
+| Dependents | Churn Rate |
+|------------|-----------:|
+| No | 31.28% |
+| Yes | 15.45% |
+
+**Business Insight**
+
+Customers with dependents are approximately twice as likely to stay compared to customers without dependents.
+
+---
+
+# Overall EDA Summary
+
+The exploratory analysis identified several strong churn indicators:
+
+- Low customer tenure
+- Month-to-month contracts
+- Fiber Optic internet service
+- Lack of Online Security
+- Lack of Tech Support
+- Electronic Check payment method
+- Higher Monthly Charges
+- Customers without dependents
+
+These insights will guide feature engineering and help interpret the machine learning models developed in the next phase.
+
+
+
