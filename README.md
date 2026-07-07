@@ -262,5 +262,14 @@ The exploratory analysis identified several strong churn indicators:
 
 These insights will guide feature engineering and help interpret the machine learning models developed in the next phase.
 
+## Model Comparison
+
+Two Logistic Regression models were evaluated: a baseline model and a model trained after applying SMOTE to address class imbalance.
+
+The baseline model achieved an accuracy of **82.1%**, with a recall of **60%** for the churn class. After applying SMOTE, the model's overall accuracy decreased to **76%**, but recall improved significantly to **83%**.
+
+This demonstrates the tradeoff between accuracy and recall. The SMOTE model correctly identified **311 churning customers**, compared to **223** in the baseline model, while reducing missed churn cases from **150** to **62**. However, this improvement came at the cost of more false positives.
+
+For customer churn prediction, identifying customers at risk of leaving is often more valuable than maximizing overall accuracy. Therefore, the SMOTE-based model is a better choice when the business prioritizes customer retention.
 
 
