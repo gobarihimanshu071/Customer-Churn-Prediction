@@ -1,168 +1,167 @@
-# Customer Churn Prediction
+# 📊 Customer Churn Prediction using Machine Learning
 
-## Objective
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-green)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-Predict whether a customer will leave a telecom company using machine learning.
+## 📖 Project Overview
 
-## Dataset
+Customer churn is one of the biggest challenges faced by subscription-based businesses such as telecom companies. Retaining an existing customer is significantly cheaper than acquiring a new one.
 
-Telco Customer Churn Dataset
+This project develops an end-to-end machine learning pipeline to predict whether a telecom customer is likely to churn based on customer demographics, account information, internet services, billing details, and contract type.
 
-## Project Status
+The project covers the complete machine learning lifecycle:
 
-- [x] Project Setup
-- [ ] EDA
-- [ ] Data Cleaning
-- [ ] Feature Engineering
-- [ ] Model Training
-- [ ] Evaluation
-- [ ] Deployment
+- Data Cleaning
+- Exploratory Data Analysis (EDA)
+- Feature Engineering
+- Model Building
+- Model Evaluation
+- Business Insights
 
-## Progress
+---
 
-### Dataset Overview
+# 🎯 Problem Statement
 
-- Records: 7043
-- Features: 21
-- Target Variable: Churn
+The objective of this project is to predict customer churn so that telecom companies can proactively identify customers at risk and implement targeted retention strategies.
 
-## Dataset Inspection
+---
 
-### Shape
-- Rows: 7043
-- Columns: 21
+# 📂 Dataset
 
-### Data Types
-- Numerical Features: 3
-- Categorical Features: 18
+**Dataset:** Telco Customer Churn Dataset
 
-### Observation
-- `TotalCharges` is stored as object instead of numeric and requires investigation.
+**Source:** Kaggle
 
-### Target Distribution
+### Dataset Summary
 
-- Churned Customers: 26.54%
-- Retained Customers: 73.46%
+| Property | Value |
+|----------|-------|
+| Records | 7043 |
+| Features | 21 |
+| Target Variable | Churn |
 
-### Observation
+---
 
-Dataset exhibits moderate class imbalance and may require techniques such as SMOTE during model training.
+# 🛠 Technologies Used
 
-### Data Quality Investigation
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- Imbalanced-learn (SMOTE)
+- Jupyter Notebook
+- Git & GitHub
 
-- `TotalCharges` was stored as object instead of numeric.
-- Investigation revealed 11 invalid entries.
-- These entries could not be converted to numeric values and require cleaning.
+---
 
-### Data Cleaning
+# ⚙ Project Workflow
 
-#### TotalCharges
+```
+Raw Dataset
+      │
+      ▼
+Data Cleaning
+      │
+      ▼
+Exploratory Data Analysis
+      │
+      ▼
+Feature Engineering
+      │
+      ▼
+One-Hot Encoding
+      │
+      ▼
+Train-Test Split
+      │
+      ▼
+Feature Scaling
+      │
+      ▼
+Model Training
+      │
+      ├── Logistic Regression
+      ├── Logistic Regression + SMOTE
+      ├── Random Forest
+      └── Tuned Random Forest
+      │
+      ▼
+Model Evaluation
+      │
+      ▼
+Business Insights
+```
 
-Issue:
-- Column stored as object instead of numeric.
+---
+
+# 🧹 Data Cleaning
+
+## TotalCharges
+
+### Issue
+
+- Stored as **object** instead of numeric.
 - 11 rows contained blank values.
 
-Investigation:
-- All affected customers had tenure = 0.
+### Investigation
 
-Resolution:
-- Replaced blank values with 0.
-- Converted TotalCharges to float64.
+All affected customers had:
 
-### Summary Statistics
+- Tenure = 0
 
-#### Tenure
-- Average tenure: 32.37 months
-- Median tenure: 29 months
-- Range: 0–72 months
+### Resolution
 
-#### Monthly Charges
-- Average monthly charge: 64.76
-- Range: 18.25–118.75
-
-#### Total Charges
-- Average total charge: 2279.73
-- Maximum total charge: 8684.80
-
-### Initial Observations
-- Large variation exists in customer spending.
-- Tenure may be an important predictor of churn.
-
-### Tenure and Churn Analysis
-
-Key Findings:
-
-- Customers who stayed had an average tenure of 37.57 months.
-- Customers who churned had an average tenure of 17.98 months.
-- Median tenure for churned customers was only 10 months.
-
-Business Insight:
-
-Customer churn is significantly higher among newer customers. Early customer retention programs could substantially reduce churn rates.
-# Exploratory Data Analysis (EDA)
-
-## Dataset Overview
-
-- Records: 7043
-- Features: 21
-- Target Variable: Churn
+- Blank values replaced with **0**
+- Converted `TotalCharges` to `float`
 
 ---
 
-## Data Cleaning
-
-### TotalCharges
-
-- Found 11 blank values in the `TotalCharges` column.
-- All affected customers had `tenure = 0`.
-- Replaced blank values with `0`.
-- Converted `TotalCharges` from object to float.
-
----
+# 📊 Exploratory Data Analysis
 
 ## Target Distribution
 
 | Churn | Percentage |
-|--------|------------|
+|--------|-----------:|
 | No | 73.46% |
 | Yes | 26.54% |
 
-Observation:
-
-- The dataset has moderate class imbalance.
-- This will be handled later using SMOTE.
+The dataset exhibits moderate class imbalance, which was later addressed using **SMOTE**.
 
 ---
 
-# Key Business Insights
+# 🔍 Key Business Insights
 
-## Tenure
+## 📅 Tenure
 
-- Customers who churned had an average tenure of **17.98 months**.
-- Customers who stayed had an average tenure of **37.57 months**.
+| Churn | Average Tenure |
+|--------|---------------:|
+| No | 37.57 Months |
+| Yes | 17.98 Months |
 
-**Business Insight**
+**Insight**
 
-New customers are much more likely to churn than long-term customers.
+Customers with shorter tenure are significantly more likely to churn.
 
 ---
 
-## Monthly Charges
+## 💰 Monthly Charges
 
-- Churned customers paid higher monthly charges on average.
-
-| Churn | Mean Monthly Charges |
-|--------|----------------------|
+| Churn | Average Monthly Charges |
+|--------|------------------------:|
 | No | 61.27 |
 | Yes | 74.44 |
 
-**Business Insight**
+**Insight**
 
-Customers paying higher monthly charges are more likely to switch providers.
+Higher monthly charges are associated with increased churn.
 
 ---
 
-## Contract Type
+## 📄 Contract Type
 
 | Contract | Churn Rate |
 |-----------|-----------:|
@@ -170,106 +169,212 @@ Customers paying higher monthly charges are more likely to switch providers.
 | One year | 11.27% |
 | Two year | 2.83% |
 
-**Business Insight**
+**Insight**
 
-Month-to-month customers have the highest churn.
-Long-term contracts significantly improve retention.
+Long-term contracts greatly reduce customer churn.
 
 ---
 
-## Internet Service
+## 🌐 Internet Service
 
-| Service | Churn Rate |
-|----------|-----------:|
+| Internet Service | Churn Rate |
+|------------------|-----------:|
 | DSL | 18.96% |
 | Fiber Optic | 41.89% |
 | No Internet | 7.40% |
 
-**Business Insight**
+**Insight**
 
-Fiber Optic customers exhibit significantly higher churn and should be prioritized for retention campaigns.
-
----
-
-## Online Security
-
-| Security | Churn Rate |
-|-----------|-----------:|
-| No | 41.77% |
-| Yes | 14.61% |
-| No Internet Service | 7.40% |
-
-**Business Insight**
-
-Customers without Online Security are almost three times more likely to churn.
+Fiber Optic customers experience substantially higher churn.
 
 ---
 
-## Tech Support
+## 🔒 Online Security
 
-| Tech Support | Churn Rate |
-|--------------|-----------:|
-| No | 41.64% |
-| Yes | 15.17% |
-| No Internet Service | 7.40% |
-
-**Business Insight**
-
-Providing technical support is strongly associated with lower churn.
+Customers without Online Security churn nearly **three times more frequently** than customers who subscribe to the service.
 
 ---
 
-## Payment Method
+## 🛠 Tech Support
 
-| Payment Method | Churn Rate |
-|----------------|-----------:|
-| Electronic Check | 45.29% |
-| Mailed Check | 19.11% |
-| Bank Transfer (Automatic) | 16.71% |
-| Credit Card (Automatic) | 15.24% |
-
-**Business Insight**
-
-Customers using Electronic Check have the highest churn rate.
+Customers with Tech Support demonstrate significantly lower churn rates.
 
 ---
 
-## Dependents
+## 💳 Payment Method
 
-| Dependents | Churn Rate |
-|------------|-----------:|
-| No | 31.28% |
-| Yes | 15.45% |
-
-**Business Insight**
-
-Customers with dependents are approximately twice as likely to stay compared to customers without dependents.
+Electronic Check customers have the highest churn rate among all payment methods.
 
 ---
 
-# Overall EDA Summary
+## 👨‍👩‍👧 Dependents
 
-The exploratory analysis identified several strong churn indicators:
+Customers with dependents are much less likely to churn than customers without dependents.
 
-- Low customer tenure
-- Month-to-month contracts
-- Fiber Optic internet service
-- Lack of Online Security
-- Lack of Tech Support
-- Electronic Check payment method
-- Higher Monthly Charges
-- Customers without dependents
+---
 
-These insights will guide feature engineering and help interpret the machine learning models developed in the next phase.
+# 📈 Machine Learning Models
 
-## Model Comparison
+The following machine learning models were trained and evaluated.
 
-Two Logistic Regression models were evaluated: a baseline model and a model trained after applying SMOTE to address class imbalance.
+- Logistic Regression
+- Logistic Regression + SMOTE
+- Random Forest
+- Tuned Random Forest
 
-The baseline model achieved an accuracy of **82.1%**, with a recall of **60%** for the churn class. After applying SMOTE, the model's overall accuracy decreased to **76%**, but recall improved significantly to **83%**.
+---
 
-This demonstrates the tradeoff between accuracy and recall. The SMOTE model correctly identified **311 churning customers**, compared to **223** in the baseline model, while reducing missed churn cases from **150** to **62**. However, this improvement came at the cost of more false positives.
+# 📊 Model Performance
 
-For customer churn prediction, identifying customers at risk of leaving is often more valuable than maximizing overall accuracy. Therefore, the SMOTE-based model is a better choice when the business prioritizes customer retention.
+| Model | Accuracy | Precision | Recall | F1 Score |
+|---------|---------:|----------:|--------:|---------:|
+| Logistic Regression | **82.1%** | **0.69** | 0.60 | **0.64** |
+| Logistic Regression + SMOTE | 76.0% | 0.52 | **0.83** | 0.64 |
+| Random Forest | 78.5% | 0.64 | 0.44 | 0.52 |
+| Tuned Random Forest | 81.1% | 0.69 | 0.52 | 0.59 |
 
+---
 
+# 📉 ROC Curve
+
+The Logistic Regression model achieved an **ROC-AUC score of 0.862**, indicating strong discrimination between churning and non-churning customers.
+
+![ROC Curve](images/roc_curve.png)
+
+---
+
+# 🌳 Feature Importance
+
+Random Forest identified the following features as the strongest predictors of churn:
+
+1. Tenure
+2. Total Charges
+3. Monthly Charges
+4. Fiber Optic Internet Service
+5. Two-Year Contract
+6. Electronic Check
+7. Online Security
+8. Tech Support
+
+These findings strongly align with the insights obtained during exploratory data analysis.
+
+![Feature Importance](images/feature_importance.png)
+
+---
+
+# 💼 Business Recommendations
+
+Based on the analysis, telecom companies should:
+
+- Focus retention campaigns on customers with low tenure.
+- Encourage customers to switch from month-to-month contracts to long-term contracts.
+- Improve service quality for Fiber Optic customers.
+- Review pricing strategies for customers with high monthly charges.
+- Promote Online Security and Tech Support services.
+- Investigate the high churn among Electronic Check users.
+
+---
+
+# 🏆 Final Results
+
+### Best Accuracy
+
+**Logistic Regression**
+
+**82.1%**
+
+---
+
+### Best Recall
+
+**Logistic Regression + SMOTE**
+
+**83%**
+
+---
+
+### Best ROC-AUC
+
+**0.862**
+
+---
+
+### Most Important Feature
+
+**Tenure**
+
+---
+
+# 📝 Conclusion
+
+Four machine learning models were evaluated to predict telecom customer churn.
+
+The baseline Logistic Regression model achieved the highest overall accuracy (**82.1%**), while Logistic Regression trained with **SMOTE** significantly improved recall from **60%** to **83%**, making it the preferred model for customer retention campaigns.
+
+The project demonstrates how exploratory data analysis, feature engineering, machine learning, and business interpretation can be combined to build a practical customer churn prediction system.
+
+---
+
+# 🚀 Future Improvements
+
+- Deploy the model using Flask or FastAPI.
+- Build a Streamlit dashboard.
+- Perform GridSearchCV for hyperparameter optimization.
+- Experiment with XGBoost and LightGBM.
+- Integrate the model into a CRM platform for real-time churn prediction.
+
+---
+
+# 📂 Project Structure
+
+```
+Customer-Churn-Predictor/
+│
+├── data/
+│   └── Telco-Customer-Churn.csv
+│
+├── notebook/
+│   └── churn_analysis.ipynb
+│
+├── images/
+│   ├── churn_distribution.png
+│   ├── roc_curve.png
+│   ├── feature_importance.png
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+---
+
+# 🚀 How to Run
+
+Clone the repository
+
+```bash
+git clone https://github.com/<your-username>/Customer-Churn-Predictor.git
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Launch Jupyter Notebook
+
+```bash
+jupyter notebook notebook/churn_analysis.ipynb
+```
+
+---
+
+# 👨‍💻 Author
+
+**Himanshu Gobari**
+
+- GitHub: https://github.com/<gobarihimanshu071>
+- LinkedIn: https://linkedin.com/in/<www.linkedin.com/in/himanshu-gobari-a60a5724b>
+
+---
