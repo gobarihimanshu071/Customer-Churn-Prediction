@@ -16,7 +16,3 @@ SessionLocal = sessionmaker(
 
 Base = declarative_base()
 
-from api.database import engine
-from api.models import Base
-
-Base.metadata.create_all(bind=engine)
