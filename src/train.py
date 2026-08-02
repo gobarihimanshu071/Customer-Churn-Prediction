@@ -1,94 +1,125 @@
-import pandas as pd
 import joblib
 import os
-from preprocess import (
-    clean_data,
-    split_features_target,
-    encode_features,
-    split_data,
-    scale_features,
-)
+import pandas as pd
+
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import StandardScaler
+
 from sklearn.linear_model import LogisticRegression
+
+from sklearn.model_selection import train_test_split
+
 from sklearn.metrics import (
     accuracy_score,
     classification_report,
-    confusion_matrix,
+    confusion_matrix
 )
 
-def load_data(file_path):
-    return pd.read_csv(file_path)
+df = pd.read_csv("data/Telco-Customer-Churn.csv")
 
-def preprocess_data(df):
-    return df
-
-def train_model(X_train,y_train):
-    model = LogisticRegression(
-        max_iter=1000,
-        random_state=42
-    )
-    model.fit(X_train,y_train)
-    return model
-
-def evaluate_model(model,X_test,y_test):
-    predictions = model.predict(X_test)
-    accuracy = accuracy_score(y_test,predictions)
-    print(f"\nAccuracy: {accuracy:.4f}\n")
-
-    print("Classification Report")
-    print(classification_report(y_test,predictions))
-
-    print("Confusion Matrix")
-    print(confusion_matrix(y_test,predictions))
-    
-
-def save_model(model,scaler,feature_columns):
-    os.makedirs("model",exist_ok=True)
-
-    joblib.dump(model,"model/churn_model.pkl")
-
-    joblib.dump(scaler,"model/scaler.pkl")
-
-    joblib.dump(
-        feature_columns,
-        "model/feature_columns.pkl"
-    )
-    print("\nmodel saved successfully!")
-    
-
-def main():
-    df = load_data("data/Telco-Customer-Churn.csv")
-
-    df = load_data("data/Telco-Customer-Churn.csv")
-
-    df = clean_data(df)
-
-    X, y = split_features_target(df)
-
-    X = encode_features(X)
-
-    X_train, X_test, y_train, y_test = split_data(X, y)
-
-    X_train_scaled, X_test_scaled, scaler = scale_features(
-        X_train,
-        X_test,
+df["TotalCharges"] = pd.to_numeric(
+    df["TotalCharges"],
+    errors="coerce"
 )
 
-    print("Preprocessing completed successfully!")
-    print(f"Training samples: {X_train.shape[0]}")
-    print(f"Testing samples: {X_test.shape[0]}")
+df["TotalCharges"]=df["TotalCharges"].fillna(0)
 
-    model = train_model(X_train_scaled,y_train)
-    evaluate_model(
-        model,X_test_scaled,
-        y_test
+X=df.drop(
+    ["customerID","Churn"],
+    axis=1
+)
+
+y=df["Churn"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+
+    X,
+    y,
+
+    test_size=0.2,
+
+    random_state=42
+)
+
+numerical_features = [
+    "SeniorCitizen",
+
+    "tenure",
+
+    "MonthlyCharges",
+
+    "TotalCharges"
+]
+
+categorical_features = X.select_dtypes(
+    include="object"
+).columns.tolist()
+
+
+preprocessor = ColumnTransformer(
+    transformers = [
+        (
+            "num",
+            StandardScaler(),
+            numerical_features
+        ),
+        (
+            "cat",
+            OneHotEncoder(
+                drop="first",
+                handle_unknown="ignore"
+            ),
+            categorical_features
+        )
+    ]
+)
+
+pipeline = Pipeline(
+    steps=[
+        (
+            "preprocessor",
+            preprocessor
+        ),
+        (
+            "classifier",
+            LogisticRegression(
+                random_state=42,
+                max_iter=1000
+            )
+        )
+    ]
+)
+pipeline.fit(
+    X_train,y_train
+)
+
+predictions = pipeline.predict(
+    X_test
+)
+
+print(
+    accuracy_score(
+        y_test,
+        predictions
     )
+)
 
-    save_model(
-        model,
-        scaler,
-        X_train.columns.tolist()
+print(
+    classification_report(
+        y_test,
+        predictions
     )
+)
 
-if __name__ == "__main__":
-    main()
-    
+print(
+    confusion_matrix(
+        y_test,
+        predictions
+    )
+)
+
+os.makedirs("model",exist_ok=True)
+
+joblib.dump(pipeline,"model/churn_pipeline.pkl")
