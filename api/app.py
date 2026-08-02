@@ -29,31 +29,31 @@ def predict(customer: Customer):
 
     result = predict_churn(customer.model_dump())
 
-    db: Session = SessionLocal()
+    db = SessionLocal()
 
     prediction = Prediction(
-    gender=customer.gender,
-    senior_citizen=customer.SeniorCitizen,
-    partner=customer.Partner,
-    dependents=customer.Dependents,
-    tenure=customer.tenure,
-    phone_service=customer.PhoneService,
-    multiple_lines=customer.MultipleLines,
-    internet_service=customer.InternetService,
-    online_security=customer.OnlineSecurity,
-    online_backup=customer.OnlineBackup,
-    device_protection=customer.DeviceProtection,
-    tech_support=customer.TechSupport,
-    streaming_tv=customer.StreamingTV,
-    streaming_movies=customer.StreamingMovies,
-    contract=customer.Contract,
-    paperless_billing=customer.PaperlessBilling,
-    payment_method=customer.PaymentMethod,
-    monthly_charges=customer.MonthlyCharges,
-    total_charges=customer.TotalCharges,
-    prediction=result["prediction"],
-    churn_probability=result["churn_probability"]
-)
+        gender=customer.gender,
+        senior_citizen=customer.SeniorCitizen,
+        partner=customer.Partner,
+        dependents=customer.Dependents,
+        tenure=customer.tenure,
+        phone_service=customer.PhoneService,
+        multiple_lines=customer.MultipleLines,
+        internet_service=customer.InternetService,
+        online_security=customer.OnlineSecurity,
+        online_backup=customer.OnlineBackup,
+        device_protection=customer.DeviceProtection,
+        tech_support=customer.TechSupport,
+        streaming_tv=customer.StreamingTV,
+        streaming_movies=customer.StreamingMovies,
+        contract=customer.Contract,
+        paperless_billing=customer.PaperlessBilling,
+        payment_method=customer.PaymentMethod,
+        monthly_charges=customer.MonthlyCharges,
+        total_charges=customer.TotalCharges,
+        prediction=result["prediction"],
+        churn_probability=result["churn_probability"]
+    )
 
     db.add(prediction)
     db.commit()

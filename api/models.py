@@ -9,12 +9,12 @@ class Prediction(Base):
 
     gender = Column(String(10))
     senior_citizen = Column(Boolean)
-    partner = Column(Boolean)
-    dependents = Column(Boolean)
+    partner = Column(String(5))
+    dependents = Column(String(5))
 
     tenure = Column(Integer)
 
-    phone_service = Column(Boolean)
+    phone_service = Column(String(5))
     multiple_lines = Column(String(30))
 
     internet_service = Column(String(30))
@@ -26,7 +26,7 @@ class Prediction(Base):
     streaming_movies = Column(String(30))
 
     contract = Column(String(30))
-    paperless_billing = Column(Boolean)
+    paperless_billing = Column(String(5))
     payment_method = Column(String(50))
 
     monthly_charges = Column(DECIMAL(10,2))
