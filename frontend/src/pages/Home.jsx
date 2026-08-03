@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import CustomerForm from "../components/CustomerForm";
+import PredictionCard from "../components/PredictionCard";
 
 function Home() {
   return (
@@ -7,24 +8,29 @@ function Home() {
 
       <Navbar />
 
-      <main className="max-w-6xl mx-auto py-10">
+      <div className="max-w-7xl mx-auto p-8">
 
-        <div className="bg-white rounded-xl shadow-md p-8">
+        <div className="grid lg:grid-cols-3 gap-8">
 
-          <h2 className="text-2xl font-semibold mb-3">
-            Welcome 👋
-          </h2>
+          {/* Left Side */}
 
-          <p className="text-gray-600">
-            This dashboard predicts whether a telecom customer is likely to churn
-            using a Machine Learning model deployed on AWS.
-          </p>
+          <div className="lg:col-span-2">
+
+            <CustomerForm />
+
+          </div>
+
+          {/* Right Side */}
+
+          <div>
+
+            <PredictionCard />
+
+          </div>
 
         </div>
 
-        <CustomerForm />
-
-      </main>
+      </div>
 
     </div>
   );

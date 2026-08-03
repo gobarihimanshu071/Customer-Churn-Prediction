@@ -68,3 +68,19 @@ def predict(customer: Customer):
     db.close()
 
     return result
+
+from fastapi.encoders import jsonable_encoder
+
+@app.get("/predictions")
+def get_predictions():
+
+    db = SessionLocal()
+
+    predictions = (
+        db.query(Prediction)
+        .order_by(Prediction.id.desc())
+        .limit(10)
+        .all()
+    )
+
+    return jsonable_encoder(predictions)

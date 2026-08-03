@@ -55,9 +55,13 @@ function CustomerForm() {
 
         <div className="bg-white rounded-xl shadow-md p-8 mt-8">
 
-            <h2 className="text-2xl font-semibold mb-6">
-                Customer Information
-            </h2>
+            <h2 className="text-3xl font-bold mb-2">
+    Customer Information
+</h2>
+
+<p className="text-gray-500 mb-8">
+    Enter the customer's telecom details.
+</p>
 
             <div className="grid grid-cols-2 gap-6">
 
