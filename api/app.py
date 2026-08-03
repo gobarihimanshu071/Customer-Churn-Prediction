@@ -73,7 +73,6 @@ from fastapi.encoders import jsonable_encoder
 
 @app.get("/predictions")
 def get_predictions():
-
     db = SessionLocal()
 
     predictions = (
@@ -82,5 +81,7 @@ def get_predictions():
         .limit(10)
         .all()
     )
+
+    db.close()
 
     return jsonable_encoder(predictions)
