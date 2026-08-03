@@ -1,8 +1,12 @@
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import CustomerForm from "../components/CustomerForm";
 import PredictionCard from "../components/PredictionCard";
-
+import PredictionHistory from "../components/PredictionHistory";
 function Home() {
+
+  const [result, setResult] = useState(null);
+
   return (
     <div className="min-h-screen bg-slate-100">
 
@@ -12,23 +16,20 @@ function Home() {
 
         <div className="grid lg:grid-cols-3 gap-8">
 
-          {/* Left Side */}
-
           <div className="lg:col-span-2">
-
-            <CustomerForm />
-
+            <CustomerForm setResult={setResult} />
           </div>
 
-          {/* Right Side */}
+          
 
           <div>
-
-            <PredictionCard />
-
+            <PredictionCard result={result} />
           </div>
 
         </div>
+        <div className="mt-8">
+    <PredictionHistory />
+</div>
 
       </div>
 
