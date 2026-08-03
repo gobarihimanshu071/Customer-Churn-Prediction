@@ -4,6 +4,7 @@ import pandas as pd
 pipeline = joblib.load("model/churn_pipeline.pkl")
 
 def predict_churn(customer):
+    
     customer_df = pd.DataFrame([customer])
 
     prediction = pipeline.predict(customer_df)[0]

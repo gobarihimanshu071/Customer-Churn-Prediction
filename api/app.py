@@ -26,7 +26,7 @@ def home():
     description="Returns churn prediction and probability."
 )
 def predict(customer: Customer):
-
+    print(customer.model_dump())
     result = predict_churn(customer.model_dump())
 
     db = SessionLocal()
