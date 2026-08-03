@@ -5,6 +5,7 @@ from api.schemas import Customer
 from api.database import SessionLocal
 from api.models import Prediction
 from src.predict import predict_churn
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Customer Churn Prediction API",
@@ -12,6 +13,13 @@ app = FastAPI(
     description="""
     REST API for predicting telecom customer churn using a Logistic Regression Pipeline.
     """
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.get("/", tags=["Home"])
