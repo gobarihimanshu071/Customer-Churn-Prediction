@@ -1,14 +1,16 @@
 services:
   backend:
-    build: .
+    image: gobarihimanshu071/churn-api:latest
     container_name: churn-backend
     ports:
       - "8000:8000"
+    restart: unless-stopped
 
   frontend:
-    build: ./frontend
+    image: gobarihimanshu071/churn-frontend:latest
     container_name: churn-frontend
     ports:
       - "3000:80"
     depends_on:
       - backend
+    restart: unless-stopped
