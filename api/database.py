@@ -1,10 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+import os 
 
-DATABASE_URL = (
-    "mysql+pymysql://admin:Theforeverstory2022@"
-    "churn-db.c9ageogoy5iq.us-east-2.rds.amazonaws.com:3306/customer_churn"
-)
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 
