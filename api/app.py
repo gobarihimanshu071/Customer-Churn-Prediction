@@ -14,9 +14,14 @@ app = FastAPI(
     REST API for predicting telecom customer churn using a Logistic Regression Pipeline.
     """
 )
+origins = [
+    "http://localhost:5173",
+    "http://customer-churn-frontend-himanshu.s3-website.us-east-2.amazonaws.com",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
